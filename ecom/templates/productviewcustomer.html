@@ -1,0 +1,68 @@
+{% extends 'index.html' %} 
+{% block content %}
+<style>
+    .productupdate{
+        width: 80%;
+        height: auto;
+        border: 4px solid black;
+        margin: auto;
+        padding: 20px;
+    }
+    .productupdate h2{
+        text-align: center;
+        text-decoration: underline;
+    }
+    .productupdate input{
+        width: 100%;
+        padding: 5px;
+        border: 5px solid gray;
+    }
+</style>
+
+<div class="container">
+    
+    <div class="productupdate">
+        <h2>Product View</h2>
+        
+        {% for item in product %}
+        <div class="row">
+            <div class="col md-6">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <table class="table">
+                    <tr>
+                        <th><label for="">Product Name:</label></th>
+                        <th>{{item.Product_Name}}</th>
+                    </tr>
+                    <tr>
+                        <th><label for="">Product Brand:</label></th>
+                        <th>{{item.Product_Brand}}</th>
+                    </tr>
+                    <tr>
+                        <th><label for="">Product Description:</label></th>
+                        <th>{{item.Product_Brand}}</th>
+                    </tr>
+                    <tr>
+                        <th><label for="">Product Price:</label></th>
+                        <th>{{item.Product_Price}}</th>
+                    </tr>
+                    <tr>
+                        <th><label for="">Product Category:</label></th>
+                        <th>{{item.Product_Category}}</th>
+                    </tr>
+                    
+                </table>
+            </div>
+            <div class="col md-6 text-center">
+                <img src="{{item.Product_Image.url}}" style="width: 80%;height: 80%;" alt=""><br><br>
+                <a href="{% url 'AddCart' item.Product_Id  %}" class="btn btn-warning" >Add to cart</a>
+                <button type="submit" class="btn btn-warning">Buy</button>
+            </div>
+        </form>
+            
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock  %}

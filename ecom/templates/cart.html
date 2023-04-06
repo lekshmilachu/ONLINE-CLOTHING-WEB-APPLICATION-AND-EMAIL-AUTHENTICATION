@@ -1,0 +1,69 @@
+{% extends 'index.html' %}
+{% block content  %}
+<style>
+    .item-head{
+        border-bottom: 1px solid gray;
+        height: 70px;
+    }
+    .item-head:nth-child(even)
+    {
+        background-color: aliceblue;
+    }
+    .order1{
+        width: 95%;
+        height: 300px;
+        border: 5px solid gray;
+        padding: 20px;
+    }
+    .order h4{
+        text-align: center;
+        text-decoration: underline;
+    }
+</style>
+<div class="container">
+    {% for message in messages %}
+
+    <h6 style="color:red">{{message}}</h6>
+
+    {% endfor %}
+    <div class="row">
+        <div class="col-md-8">
+                <div class="row item-head">
+                    <div class="col-2 item">Item name</div>
+                    <div class="col-2 item">Price</div>
+                    <div class="col-2 item">Quantity</div>
+                    <div class="col-2 item">Image</div>
+                    <div class="col-2 item"><a href="" >Delete</a></div>
+
+                </div>
+                {% for item in products %}
+                <div class="row item-head">
+                    <div class="col-2 item">{{item.product.Product_Name}}</div>
+                    <div class="col-2 item">{{item.product.Product_Price}}</div>
+                    <div class="col-2 item">{{item.numberofitems}}</div>
+                    <div class="col-2 item"><img src="{{item.product.Product_Image.url}}" alt="" style="width: 90px;height: 60px;"></div>
+                    <div class="col-2 item"><a href="{% url 'DeleteCart' item.id %}" class="btn btn-danger">Delete</a></div>
+
+                </div>
+                {% endfor %}
+        </div>
+        <div class="col-md-4">
+            <div class="order1">
+                
+                <h4>Place Order</h4><br><br>
+                {% for item in products %}
+                <h6>{{item.product.Product_Name}}:{{item.product.Product_Price}}</h6>
+                {% endfor %}
+
+.............................................................................................
+                <br><br>
+                <h2>Total amount:{{total}}</h2>
+                <a href="{%url 'PlaceOrder' %}"  class="btn btn-warning rounded-pill">Place Order</a>
+            </div>
+        </div>
+    </div>
+</div>
+<BR><br><br>
+
+
+{% endblock   %} 
